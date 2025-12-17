@@ -40,7 +40,7 @@ struct MyStringHash {
                 val = val * 36ULL + (unsigned long long)letterDigitToNumber(c);
             }
 
-            w[wi] = val;   // w[4] is last chunk, then w[3], ...
+            w[wi] = val;   
             wi--;
         }
 
@@ -71,7 +71,7 @@ struct MyStringHash {
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::mt19937 generator (seed);  // mt19937 is a standard random number generator
 
-        // Simply call generator() [it has an operator()] to get another random number
+        
         for(int i{ 0 }; i < 5; ++i)
         {
             rValues[i] = generator();

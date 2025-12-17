@@ -181,7 +181,7 @@ private:
     double resizeAlpha_;
     size_t currSize_;
 
-    // NEW: counts non-null pointers (includes deleted)
+    
     size_t occupied_;
 };
 
@@ -238,7 +238,7 @@ size_t HashTable<K,V,Prober,Hash,KEqual>::size() const
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 {
-    // IMPORTANT: load factor uses occupied_, not currSize_
+    
     double lf = (double)occupied_ / (double)CAPACITIES[mIndex_];
     if(lf >= resizeAlpha_) {
         resize();
@@ -252,14 +252,14 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     if(table_[loc] == nullptr) {
         table_[loc] = new HashItem(p);
         currSize_++;
-        occupied_++; // NEW
+        occupied_++; 
     }
     else {
         table_[loc]->item.second = p.second;
         if(table_[loc]->deleted) {
             table_[loc]->deleted = false;
             currSize_++;
-            // occupied_ stays the same
+            
         }
     }
 }
@@ -273,7 +273,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
     if(table_[loc] != nullptr && !table_[loc]->deleted) {
         table_[loc]->deleted = true;
         currSize_--;
-        // occupied_ DOES NOT change
+        
     }
 }
 
@@ -320,7 +320,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
     currSize_ = 0;
     occupied_ = 0;
 
-    // Optional: avoid resize while rehashing (keep it dumb/simple)
+    
     double oldAlpha = resizeAlpha_;
     resizeAlpha_ = 1.0;
 
