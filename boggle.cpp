@@ -9,7 +9,7 @@
 #include <exception>
 #endif
 
-#include "boggle.h"
+#include "boggle.h" 
 
 std::vector<std::vector<char> > genBoard(unsigned int n, int seed)
 {
